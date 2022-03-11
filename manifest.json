@@ -2,5 +2,18 @@
   "name": "No To Phising",
   "description": "Say No To Phising by reminding you not to click on links!",
   "version": "1.0",
-  "manifest_version": 3
+  "manifest_version": 3,
+  "icons": {
+    "16": "images/myicon.png"
+  },
+  "permissions": [
+    "activeTab"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "/images/myicon.png"
+    }
+  }
 }
+
