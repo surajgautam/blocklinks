@@ -8,6 +8,9 @@
     "48": "/images/myicon.png",
     "128": "/images/myicon.png"
   },
+  "permissions" : [
+    "storage"
+  ],
 //  "background": {
 //    "service_worker": "worker.js"
 //  },

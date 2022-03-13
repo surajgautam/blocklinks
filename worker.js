@@ -1,5 +1,3 @@
-document.addEventListener('click', (e) => {
-    // var href = e.target.closest('a').href || '';
-    // console.log(href);
-    console.log('hey')
-})
+chrome.storage.local.set({key: value}, function() {
+    console.log('Value is set to ' + value);
+});

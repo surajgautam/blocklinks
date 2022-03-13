@@ -16,6 +16,22 @@ const showStatus = () => {
     }
 }
 
+const setEnabled = (value) => {
+    chrome.storage.sync.set({"enabled": value}, () => {
+    });
+}
+
+const syncEnabled = () => {
+    chrome.storage.sync.get(["enabled"], (result) => {
+        setEnabled(!result.value)
+    })
+}
+
 enable.addEventListener("click", async () => {
     showStatus();
+    syncEnabled();
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    setEnabled(false);
+})
