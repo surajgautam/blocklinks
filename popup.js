@@ -1,37 +1,64 @@
-const showStatus = () => {
-    var status = document.getElementById('status');
-    var button = document.getElementById('enable');
-    const statusValue = status.innerText;
-    if (statusValue === 'Enabled') {
-        status.innerText = 'Disabled';
-        button.innerText = 'Enable';
-        button.className = 'btn btn-success';
-        status.className = 'text-danger';
-        status.style.color = 'red';
-    } else if (statusValue === 'Disabled') {
-        status.innerText = 'Enabled';
-        button.innerText = 'Disable';
-        button.className = 'btn btn-danger';
-        status.className = 'text-success';
-    }
-}
+const ENABLED = "enabled";
 
-const setEnabled = (value) => {
-    chrome.storage.sync.set({"enabled": value}, () => {
+const showStatus = async () => {
+    getStorageValue(ENABLED).then(result => {
+        var status = document.getElementById('status');
+        var button = document.getElementById('enable');
+        if (!result) {
+            status.innerText = 'Disabled';
+            button.innerText = 'Enable';
+            button.className = 'btn btn-success';
+            status.className = 'text-danger';
+            status.style.color = 'red';
+        } else {
+            status.innerText = 'Enabled';
+            button.innerText = 'Disable';
+            button.className = 'btn btn-danger';
+            status.className = 'text-success';
+        }
     });
 }
 
-const syncEnabled = () => {
-    chrome.storage.sync.get(["enabled"], (result) => {
-        setEnabled(!result.value)
+const setStorageValue = (key, value) => {
+    let obj = {
+        [key]: value
+    };
+    console.log(obj)
+    return new Promise((resolve, reject) => {
+        chrome.storage.sync.set(obj, () => {
+            resolve(value);
+        })
     })
+
+}
+
+const getStorageValue = async (key) => {
+    let p = new Promise(((resolve, reject) => {
+        chrome.storage.sync.get(key, (result) => {
+            resolve(result[key]);
+        });
+    }))
+    return await p;
 }
 
 enable.addEventListener("click", async () => {
-    showStatus();
-    syncEnabled();
+    getStorageValue(ENABLED).then(value => {
+        setStorageValue(ENABLED, !value)
+            .then(result => {
+                showStatus();
+            })
+    })
 });
 
+// when the dom is loaded, set value to false i.e the extension is disabled
 document.addEventListener('DOMContentLoaded', () => {
-    setEnabled(false);
+    getStorageValue(ENABLED).then(result => {
+        if (result === undefined) {
+            setStorageValue(ENABLED, false).then(result => {
+                showStatus();
+            })
+        } else {
+            showStatus();
+        }
+    })
 })
