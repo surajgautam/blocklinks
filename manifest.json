@@ -9,11 +9,16 @@
     "128": "/images/myicon.png"
   },
   "permissions" : [
+    "tabs",
+    "activeTab",
     "storage"
   ],
-  "background": {
-    "service_worker": "worker.js"
-  },
+  "content_scripts": [
+    {
+      "matches": ["https://*/*", "http://*/*"],
+      "js": ["alertLink.js"]
+    }
+  ],
   "action": {
     "default_popup": "popup.html",
     "default_icon": {
