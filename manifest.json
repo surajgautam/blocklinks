@@ -1,6 +1,6 @@
 {
-  "name": "Stop Phishing",
-  "description": "Say No To Phishing by reminding you to not click on links!",
+  "name": "Block Links",
+  "description": "Say No To Phishing by not permitting to click links!",
   "version": "1.0",
   "manifest_version": 3,
   "icons": {

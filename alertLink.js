@@ -3,9 +3,7 @@ document.addEventListener('click', e => {
         if (result) {
             var anchorElement = e.target.closest('a');
             if (anchorElement && anchorElement.href) {
-                // e.preventDefault();
-                alert('Do you trust this link? ' + anchorElement.href)
-                window.location.href = anchorElement.href;
+                e.preventDefault();
             }
         }
     });
