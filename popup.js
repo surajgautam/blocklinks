@@ -23,7 +23,6 @@ const setStorageValue = (key, value) => {
     let obj = {
         [key]: value
     };
-    console.log(obj)
     return new Promise((resolve, reject) => {
         chrome.storage.sync.set(obj, () => {
             resolve(value);

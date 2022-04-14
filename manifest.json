@@ -1,6 +1,6 @@
 {
   "name": "Block Links",
-  "description": "Say No To Phishing by not permitting to click links!",
+  "description": "Say No To Phishing by blocking link clicks",
   "version": "1.0",
   "manifest_version": 3,
   "icons": {
@@ -15,8 +15,8 @@
   ],
   "content_scripts": [
     {
-      "matches": ["https://*/*", "http://*/*"],
-      "js": ["alertLink.js"]
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["jquery.js","script.js"]
     }
   ],
   "action": {
