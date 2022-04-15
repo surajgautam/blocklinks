@@ -1,19 +1,4 @@
-// document.addEventListener('click', e => {
-//     getStorageValue("enabled").then(result => {
-//         if (result) {
-//             var anchorElement = e.target.closest('a');
-//             if (anchorElement && anchorElement.href) {
-//                 alert('prevented')
-//                 e.preventDefault();
-//                 e.stopPropagation();
-//                 e.stopImmediatePropagation();
-//                 return false;
-//             }
-//         }
-//     });
-// })
-
-document.addEventListener('click',  e => {
+document.addEventListener('click', e => {
     //preventing by default at first because e.preventDefault() doesn't work after async call.
     e.preventDefault();
     getStorageValue("enabled").then(result => {
